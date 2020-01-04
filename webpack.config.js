@@ -43,7 +43,7 @@ module.exports = [
       filename: '[name].js',
       path: path.resolve(__dirname, 'dist'),
       libraryTarget: 'umd',
-      library: 'Vditor',
+      library: 'Uastat',
       libraryExport: 'default',
     },
     entry: {
