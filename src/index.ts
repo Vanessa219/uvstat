@@ -23,7 +23,7 @@ class Uastat {
 
         const statData = await this.getStat(urls)
         Object.keys(statData).forEach(key => {
-            const renderElement: HTMLElement = document.querySelector(`[data-${this.options.renderName}=${key}]`)
+            const renderElement: HTMLElement = document.querySelector(`[data-${this.options.renderName}="${key}"]`)
             if (renderElement) {
                 renderElement.innerText = statData[key]
             }
