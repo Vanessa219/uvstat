@@ -11,7 +11,7 @@ interface IResponse {
     data: { [key: string]: string }
 }
 
-declare class IUastatConstructor {
+declare class IUvstatConstructor {
 
     public getStat(): string[];
 

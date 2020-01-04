@@ -9,7 +9,7 @@ const path = require('path')
 const webpack = require('webpack')
 const pkg = require('./package.json')
 const banner = new webpack.BannerPlugin({
-  banner: `uastat v${pkg.version} - Statistics tool for static page.
+  banner: `uvstat v${pkg.version} - Statistics tool for static page.
   
 MIT License
 
@@ -43,7 +43,7 @@ module.exports = [
       filename: '[name].js',
       path: path.resolve(__dirname, 'dist'),
       libraryTarget: 'umd',
-      library: 'Uastat',
+      library: 'Uvstat',
       libraryExport: 'default',
     },
     entry: {

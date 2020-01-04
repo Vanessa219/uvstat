@@ -1,5 +1,5 @@
 {
-  "name": "uastat",
+  "name": "uvstat",
   "version": "1.0.0",
   "description": "Statistics tool for static page",
   "main": "dist/index.min.js",
@@ -10,9 +10,9 @@
   ],
   "author": "Vanessa <v@b3log.org> (http://vanessa.b3log.org)",
   "license": "MIT",
-  "repository": "git://github.com/Vanessa219/uastat.git",
+  "repository": "git://github.com/Vanessa219/uvstat.git",
   "bugs": {
-    "url": "https://github.com/Vanessa219/uastat/issues"
+    "url": "https://github.com/Vanessa219/uvstat/issues"
   },
   "scripts": {
     "build": "webpack",

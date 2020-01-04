@@ -1,8 +1,8 @@
-import Uastat from '../src/index'
+import Uvstat from '../src/index'
 
-const uastat = new Uastat()
-uastat.renderStat()
-uastat.getStat(['http://localhost:9219']).then(stats => {
+const uvstat = new Uvstat()
+uvstat.renderStat()
+uvstat.getStat(['http://localhost:9219']).then(stats => {
   console.log('getStat: ', stats)
 })
-uastat.setStat()
+uvstat.setStat()

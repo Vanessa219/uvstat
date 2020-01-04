@@ -2,8 +2,8 @@ export const mergeOptions = (options: IOptions) => {
     const defaultOptions = {
         url: 'https://hacpai.com/uvstat',
         cache: true,
-        cacheId: 'uastat',
-        renderName: 'uastaturl'
+        cacheId: 'uvstat',
+        renderName: 'uvstaturl'
     }
 
     return Object.assign({}, defaultOptions, options)

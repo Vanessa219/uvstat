@@ -1,7 +1,7 @@
 import {mergeOptions} from "./options";
 import {post} from "./util/fetch";
 
-class Uastat {
+class Uvstat {
     private options: IOptions
 
     constructor(options?: IOptions) {
@@ -46,4 +46,4 @@ class Uastat {
     }
 }
 
-export default Uastat
+export default Uvstat
