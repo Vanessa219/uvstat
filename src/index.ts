@@ -18,7 +18,7 @@ class Uvstat {
     public async renderStat() {
         const urls: string[] = [];
         document.querySelectorAll(`[data-${this.options.renderName}]`).forEach((item) => {
-            urls.push(item.getAttribute(`data-${this.options.renderName}`));
+            urls.push(item.getAttribute(`data-${this.options.renderName}`).toLowerCase());
             const height = item.getBoundingClientRect().height;
             item.innerHTML = this.options.loading;
             (item.firstElementChild as HTMLElement).style.height = height + "px";
@@ -26,13 +26,14 @@ class Uvstat {
         });
 
         if (urls.length === 0) {
-            return
+            return;
         }
 
         try {
             const statData = await this.getStat(urls, this.options.timeout);
             Object.keys(statData).forEach((key) => {
-                const renderElement: HTMLElement = document.querySelector(`[data-${this.options.renderName}="${key}"]`);
+                const renderElement: HTMLElement =
+                    document.querySelector(`[data-${this.options.renderName}="${key}" i]`);
                 if (!renderElement) {
                     return;
                 }
@@ -40,7 +41,8 @@ class Uvstat {
             });
         } catch (e) {
             urls.forEach((key) => {
-                const renderElement: HTMLElement = document.querySelector(`[data-${this.options.renderName}="${key}"]`);
+                const renderElement: HTMLElement =
+                    document.querySelector(`[data-${this.options.renderName}="${key}" i]`);
                 if (!renderElement) {
                     return;
                 }
@@ -61,6 +63,7 @@ class Uvstat {
             url += location.hash;
         }
 
+        url = url.toLowerCase();
         if (this.options.cache) {
             const cache = JSON.parse(localStorage.getItem(this.options.cacheId) || "[]");
             if (cache.includes(url)) {
