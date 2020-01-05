@@ -11,8 +11,6 @@ export const mergeOptions = (options: IOptions) => {
         renderName: "uvstaturl",
         timeout: 2000,
         url: "https://hacpai.com/uvstat",
-        structure: 'parent', // parent | self
-        showCount: 1
     };
 
     if (options && options.location) {

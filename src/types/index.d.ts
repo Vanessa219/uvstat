@@ -10,8 +10,6 @@ interface IOptions {
         search: boolean,
         hash: boolean,
     };
-    structure?:string
-    showCount?:number
 }
 
 interface IResponse {

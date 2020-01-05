@@ -19,51 +19,38 @@ class Uvstat {
         const urls: string[] = [];
         document.querySelectorAll(`[data-${this.options.renderName}]`).forEach((item) => {
             urls.push(item.getAttribute(`data-${this.options.renderName}`));
-            item.innerHTML = this.options.loading
             const height = item.getBoundingClientRect().height;
-            (item.firstElementChild as HTMLElement).style.height = height + 'px';
-            (item.firstElementChild as HTMLElement).style.width = height + 'px';
+            item.innerHTML = this.options.loading;
+            (item.firstElementChild as HTMLElement).style.height = height + "px";
+            (item.firstElementChild as HTMLElement).style.width = height + "px";
         });
+
+        if (urls.length === 0) {
+            return
+        }
 
         try {
             const statData = await this.getStat(urls, this.options.timeout);
             Object.keys(statData).forEach((key) => {
                 const renderElement: HTMLElement = document.querySelector(`[data-${this.options.renderName}="${key}"]`);
                 if (!renderElement) {
-                    return
+                    return;
                 }
-                if (statData[key] >= this.options.showCount) {
-                    if (this.options.structure === 'parent') {
-                        renderElement.parentElement.style.display = 'initial'
-                    } else {
-                        renderElement.style.display = 'initial'
-                    }
-                    renderElement.innerText = statData[key].toString();
-                } else {
-                    if (this.options.structure === 'parent') {
-                        renderElement.parentElement.style.display = 'none'
-                    } else {
-                        renderElement.style.display = 'none'
-                    }
-                }
+                renderElement.innerText = statData[key].toString();
             });
         } catch (e) {
             urls.forEach((key) => {
                 const renderElement: HTMLElement = document.querySelector(`[data-${this.options.renderName}="${key}"]`);
                 if (!renderElement) {
-                    return
+                    return;
                 }
-                if (this.options.structure === 'parent') {
-                    renderElement.parentElement.style.display = 'none'
-                } else {
-                    renderElement.style.display = 'none'
-                }
+                renderElement.innerText = "0";
             });
         }
     }
 
     public setStat() {
-        let url = location.origin + location.pathname;
+        let url = location.origin;
         if (this.options.location.pathname) {
             url += location.pathname;
         }

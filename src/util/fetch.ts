@@ -1,4 +1,4 @@
-export const post = (url: string, data?: { data: string[] }, timeout?:number) => {
+export const post = (url: string, data?: { data: string[] }, timeout?: number) => {
     return new Promise<IResponse>((resolve, reject) => {
         fetch(url, {
             body: JSON.stringify(data),
@@ -10,9 +10,9 @@ export const post = (url: string, data?: { data: string[] }, timeout?:number) =>
             return resolve(responseData);
         });
         if (timeout) {
-            setTimeout(()=> {
-                reject(data)
-            }, timeout)
+            setTimeout(() => {
+                reject(data);
+            }, timeout);
         }
     });
 };
