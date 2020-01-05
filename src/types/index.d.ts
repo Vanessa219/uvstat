@@ -20,7 +20,7 @@ interface IResponse {
 
 declare class IUvstatConstructor {
 
-    public getStat(): string[];
+    public getStat(urls: string[], timeout?: number): string[];
 
     public setStat(): void;
 

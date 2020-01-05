@@ -2,7 +2,17 @@ export const mergeOptions = (options: IOptions) => {
     const defaultOptions: IOptions = {
         cache: true,
         cacheId: "uvstat",
-        loading: '<svg style="background: none;vertical-align: bottom;" width="160px"  height="160px"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-double-ring"><circle cx="50" cy="50" ng-attr-r="{{config.radius}}" ng-attr-stroke-width="{{config.width}}" ng-attr-stroke="{{config.c1}}" ng-attr-stroke-dasharray="{{config.dasharray}}" fill="none" stroke-linecap="round" r="20" stroke-width="4" stroke="#3b3e43" stroke-dasharray="31.41592653589793 31.41592653589793" transform="rotate(111.924 50 50)"><animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1.5s" begin="0s" repeatCount="indefinite"></animateTransform></circle><circle cx="50" cy="50" ng-attr-r="{{config.radius2}}" ng-attr-stroke-width="{{config.width}}" ng-attr-stroke="{{config.c2}}" ng-attr-stroke-dasharray="{{config.dasharray2}}" ng-attr-stroke-dashoffset="{{config.dashoffset2}}" fill="none" stroke-linecap="round" r="15" stroke-width="4" stroke="#d23f31" stroke-dasharray="23.561944901923447 23.561944901923447" stroke-dashoffset="23.561944901923447" transform="rotate(-111.924 50 50)"><animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;-360 50 50" keyTimes="0;1" dur="1.5s" begin="0s" repeatCount="indefinite"></animateTransform></circle></svg>',
+        loading: `<svg version="1.1" style="vertical-align: bottom;" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+<circle fill="#3b3e43" stroke="none" cx="6" cy="50" r="6">
+<animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1"></animate>
+</circle>
+<circle fill="#3b3e43" stroke="none" cx="26" cy="50" r="6">
+<animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.2"></animate>
+</circle>
+<circle fill="#3b3e43" stroke="none" cx="46" cy="50" r="6">
+<animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.3"></animate>
+</circle>
+</svg>`,
         location: {
             hash: false,
             pathname: true,
