@@ -1,4 +1,4 @@
-export const post = (url: string, data?: { data: string[] }, timeout?: number) => {
+export const post = (url: string, data?: { data: IUrlCount[] }, timeout?: number) => {
     return new Promise<IResponse>((resolve, reject) => {
         fetch(url, {
             body: JSON.stringify(data),

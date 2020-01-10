@@ -61,7 +61,7 @@ uvstat.setStat()
 ||说明|
 |---|---|
 |getStat(urls: string[], timeout?: number): string[]|获取给定 urls 的计数|
-|setStat()|为当前页面添加计数|
+|addStat()|为当前页面添加计数|
 |renderStat()|计数渲染|
 |clearCache()|清除缓存|
 

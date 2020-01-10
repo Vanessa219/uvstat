@@ -8,7 +8,7 @@ class Uvstat {
         this.options = mergeOptions(options);
     }
 
-    public async getStat(urls: string[], timeout: number = 0) {
+    public async getStat(urls: IUrlCount[], timeout: number = 0) {
         const responseData = await post(`${this.options.url}/get`, {
             data: urls,
         }, timeout);
@@ -16,9 +16,12 @@ class Uvstat {
     }
 
     public async renderStat() {
-        const urls: string[] = [];
+        const urls: IUrlCount[] = [];
         document.querySelectorAll(`[data-${this.options.renderName}]`).forEach((item) => {
-            urls.push(item.getAttribute(`data-${this.options.renderName}`).toLowerCase());
+            urls.push({
+                count: parseInt(item.textContent.trim(), 10) || 0,
+                url: item.getAttribute(`data-${this.options.renderName}`).toLowerCase(),
+            });
             const height = item.getBoundingClientRect().height;
             item.innerHTML = this.options.loading;
             (item.firstElementChild as HTMLElement).style.height = height + "px";
@@ -51,7 +54,7 @@ class Uvstat {
         }
     }
 
-    public setStat() {
+    public addStat() {
         let url = location.origin;
         if (this.options.location.pathname) {
             url += location.pathname;

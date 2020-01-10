@@ -12,6 +12,11 @@ interface IOptions {
     };
 }
 
+interface IUrlCount {
+    url: string;
+    count: number;
+}
+
 interface IResponse {
     msg: string;
     code: number;
@@ -20,7 +25,7 @@ interface IResponse {
 
 declare class IUvstatConstructor {
 
-    public getStat(urls: string[], timeout?: number): string[];
+    public getStat(urls: IUrlCount[], timeout?: number): string[];
 
     public setStat(): void;
 
