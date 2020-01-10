@@ -19,7 +19,8 @@ class Uvstat {
         const urls: IUrlCount[] = [];
         document.querySelectorAll(`[data-${this.options.renderName}]`).forEach((item) => {
             urls.push({
-                count: parseInt(item.textContent.trim(), 10) || 0,
+                count: parseInt(item.textContent.trim().replace(/,/g, '')
+                    .replace(/ /g, ''), 10) || 0,
                 url: item.getAttribute(`data-${this.options.renderName}`).toLowerCase(),
             });
             const height = item.getBoundingClientRect().height;
