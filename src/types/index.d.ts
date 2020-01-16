@@ -14,14 +14,10 @@ interface IOptions {
     cmtAPI?: string;
 }
 
-interface IUrlCount {
-    url: string;
+interface ICount {
+    url?: string;
     count: number;
-}
-
-interface ICmtCount {
-    id: string;
-    count: number;
+    id?: string;
 }
 
 interface IResponse {
@@ -32,7 +28,9 @@ interface IResponse {
 
 declare class IUvstatConstructor {
 
-    public getStat(urls: IUrlCount[], timeout?: number): string[];
+    public getStat(urls: ICount[], timeout?: number): string[];
+
+    public getCmtStat(urls: ICount[], timeout?: number): string[];
 
     public setStat(): void;
 

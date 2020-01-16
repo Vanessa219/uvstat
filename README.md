@@ -63,8 +63,8 @@ uvstat.addStat()
 
 ||说明|
 |---|---|
-|getStat(urls: IUrlCount[], timeout: number = 0)|获取给定 urls 的浏览数|
-|getCmtStat(cmts: ICmtCount[], timeout: number = 0)|获取给定帖子 id 的评论数|
+|getStat(urls: ICount[], timeout: number = 0)|获取给定 url 的浏览数|
+|getCmtStat(cmts: ICount[], timeout: number = 0)|获取给定帖子 id 的评论数|
 |addStat()|为当前页面添加计数|
 |renderStat()|浏览计数渲染|
 |renderCmtStat()|评论计数渲染|

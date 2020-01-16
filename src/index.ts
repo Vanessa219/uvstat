@@ -1,5 +1,6 @@
 import {mergeOptions} from "./options";
 import {post} from "./util/fetch";
+import {getCounts, renderError, renderSucc} from "./util/render";
 
 class Uvstat {
     private options: IOptions;
@@ -8,14 +9,14 @@ class Uvstat {
         this.options = mergeOptions(options);
     }
 
-    public async getStat(urls: IUrlCount[], timeout: number = 0) {
+    public async getStat(urls: ICount[], timeout: number = 0) {
         const responseData = await post(`${this.options.url}/get`, {
             data: urls,
         }, timeout);
         return responseData.data;
     }
 
-    public async getCmtStat(cmts: ICmtCount[], timeout: number = 0) {
+    public async getCmtStat(cmts: ICount[], timeout: number = 0) {
         const responseData = await post(this.options.cmtAPI, {
             data: cmts,
         }, timeout);
@@ -23,88 +24,30 @@ class Uvstat {
     }
 
     public async renderStat() {
-        const urls: IUrlCount[] = [];
-        document.querySelectorAll(`[data-${this.options.renderName}]`).forEach((item) => {
-            urls.push({
-                count: parseInt(item.textContent.trim().replace(/,/g, "")
-                    .replace(/ /g, ""), 10) || 0,
-                url: item.getAttribute(`data-${this.options.renderName}`).toLowerCase(),
-            });
-            const height = item.getBoundingClientRect().height;
-            item.innerHTML = this.options.loading;
-            (item.firstElementChild as HTMLElement).style.height = height + "px";
-            (item.firstElementChild as HTMLElement).style.width = height + "px";
-        });
-
+        const urls = getCounts(this.options.renderName, this.options.loading, "url");
         if (urls.length === 0) {
             return;
         }
 
         try {
             const statData = await this.getStat(urls, this.options.timeout);
-            Object.keys(statData).forEach((key) => {
-                const renderElement: HTMLElement =
-                    document.querySelector(`[data-${this.options.renderName}="${key}" i]`);
-                if (!renderElement) {
-                    return;
-                }
-                renderElement.innerText = statData[key].toString();
-            });
+            renderSucc(statData, this.options.renderName);
         } catch (e) {
-            urls.forEach((key) => {
-                const renderElement: HTMLElement =
-                    document.querySelector(`[data-${this.options.renderName}="${key}" i]`);
-                if (!renderElement) {
-                    return;
-                }
-                renderElement.innerText = "0";
-            });
+            renderError(urls, this.options.renderName, "url");
         }
     }
 
     public async renderCmtStat() {
-        const cmts: ICmtCount[] = [];
-        document.querySelectorAll(`[data-${this.options.renderCmtName}]`).forEach((item) => {
-            const ocount = parseInt(item.textContent.trim().replace(/,/g, "")
-                    .replace(/ /g, ""), 10) || 0;
-            cmts.push({
-                count: ocount,
-                id: item.getAttribute(`data-${this.options.renderCmtName}`).toLowerCase(),
-            });
-            const height = item.getBoundingClientRect().height;
-            item.innerHTML = this.options.loading;
-            item.setAttribute("data-ocount", ocount.toString());
-            (item.firstElementChild as HTMLElement).style.height = height + "px";
-            (item.firstElementChild as HTMLElement).style.width = height + "px";
-        });
-
+        const cmts = getCounts(this.options.renderCmtName, this.options.loading, "id");
         if (cmts.length === 0) {
             return;
         }
 
         try {
             const statData = await this.getCmtStat(cmts, this.options.timeout);
-            Object.keys(statData).forEach((key) => {
-                const renderElement: HTMLElement =
-                    document.querySelector(`[data-${this.options.renderCmtName}="${key}" i]`);
-                if (!renderElement) {
-                    return;
-                }
-                if (statData[key] === -1) {
-                    renderElement.innerText = renderElement.getAttribute("data-ocount");
-                } else {
-                    renderElement.innerText = statData[key].toString();
-                }
-            });
+            renderSucc(statData, this.options.renderCmtName);
         } catch (e) {
-            cmts.forEach((key) => {
-                const renderElement: HTMLElement =
-                    document.querySelector(`[data-${this.options.renderCmtName}="${key}" i]`);
-                if (!renderElement) {
-                    return;
-                }
-                renderElement.innerText = "0";
-            });
+            renderError(cmts, this.options.renderCmtName, "id");
         }
     }
 

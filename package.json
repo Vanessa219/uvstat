@@ -1,6 +1,6 @@
 {
   "name": "uvstat",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Statistics tool for static page",
   "main": "dist/index.min.js",
   "funding": "https://hacpai.com/sponsor",
