@@ -18,9 +18,11 @@ export const mergeOptions = (options: IOptions) => {
             pathname: true,
             search: false,
         },
+        renderCmtName: "uvstatcmt",
         renderName: "uvstaturl",
         timeout: 2000,
         url: "https://hacpai.com/uvstat",
+        cmtAPI: "https://hacpai.com/apis/vcomment/count",
     };
 
     if (options && options.location) {

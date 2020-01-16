@@ -19,10 +19,11 @@ import Uvstat from 'uvstat'
 
 const uvstat = new Uvstat()
 uvstat.renderStat()
+uvstat.renderCmtStat()
 uvstat.getStat(['http://localhost:9219']).then(stats => {
   console.log('getStat: ', stats)
 })
-uvstat.setStat()
+uvstat.addStat()
 ```
 
 ### HTML script
@@ -51,7 +52,9 @@ uvstat.setStat()
 |location.hash|是否统计 hash|false|
 |location.pathname|是否统计 pathname|true|
 |location.search|是否统计 search|false|
-|renderName|计数元素中的 data 属性名称|'uvstaturl'|
+|renderName|浏览计数元素中的 data 属性名称|'uvstaturl'|
+|renderCmtName|评论计数元素中的 data 属性名称|'uvstatcmt'|
+|cmtAPI|评论统计请求地址|'https://hacpai.com/apis/vcomment/count'|
 |timeout|请求超时 ms|2000|
 |url|服务端请求地址|'https://hacpai.com/uvstat'|
 
@@ -60,9 +63,11 @@ uvstat.setStat()
 
 ||说明|
 |---|---|
-|getStat(urls: string[], timeout?: number): string[]|获取给定 urls 的计数|
+|getStat(urls: IUrlCount[], timeout: number = 0)|获取给定 urls 的浏览数|
+|getCmtStat(cmts: ICmtCount[], timeout: number = 0)|获取给定帖子 id 的评论数|
 |addStat()|为当前页面添加计数|
-|renderStat()|计数渲染|
+|renderStat()|浏览计数渲染|
+|renderCmtStat()|评论计数渲染|
 |clearCache()|清除缓存|
 
 ## 欢迎关注 B3log 开源社区微信公众号 `B3log开源`

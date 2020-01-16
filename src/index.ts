@@ -15,12 +15,19 @@ class Uvstat {
         return responseData.data;
     }
 
+    public async getCmtStat(cmts: ICmtCount[], timeout: number = 0) {
+        const responseData = await post(this.options.cmtAPI, {
+            data: cmts,
+        }, timeout);
+        return responseData.data;
+    }
+
     public async renderStat() {
         const urls: IUrlCount[] = [];
         document.querySelectorAll(`[data-${this.options.renderName}]`).forEach((item) => {
             urls.push({
-                count: parseInt(item.textContent.trim().replace(/,/g, '')
-                    .replace(/ /g, ''), 10) || 0,
+                count: parseInt(item.textContent.trim().replace(/,/g, "")
+                    .replace(/ /g, ""), 10) || 0,
                 url: item.getAttribute(`data-${this.options.renderName}`).toLowerCase(),
             });
             const height = item.getBoundingClientRect().height;
@@ -47,6 +54,52 @@ class Uvstat {
             urls.forEach((key) => {
                 const renderElement: HTMLElement =
                     document.querySelector(`[data-${this.options.renderName}="${key}" i]`);
+                if (!renderElement) {
+                    return;
+                }
+                renderElement.innerText = "0";
+            });
+        }
+    }
+
+    public async renderCmtStat() {
+        const cmts: ICmtCount[] = [];
+        document.querySelectorAll(`[data-${this.options.renderCmtName}]`).forEach((item) => {
+            const ocount = parseInt(item.textContent.trim().replace(/,/g, "")
+                    .replace(/ /g, ""), 10) || 0;
+            cmts.push({
+                count: ocount,
+                id: item.getAttribute(`data-${this.options.renderCmtName}`).toLowerCase(),
+            });
+            const height = item.getBoundingClientRect().height;
+            item.innerHTML = this.options.loading;
+            item.setAttribute("data-ocount", ocount.toString());
+            (item.firstElementChild as HTMLElement).style.height = height + "px";
+            (item.firstElementChild as HTMLElement).style.width = height + "px";
+        });
+
+        if (cmts.length === 0) {
+            return;
+        }
+
+        try {
+            const statData = await this.getCmtStat(cmts, this.options.timeout);
+            Object.keys(statData).forEach((key) => {
+                const renderElement: HTMLElement =
+                    document.querySelector(`[data-${this.options.renderCmtName}="${key}" i]`);
+                if (!renderElement) {
+                    return;
+                }
+                if (statData[key] === -1) {
+                    renderElement.innerText = renderElement.getAttribute("data-ocount");
+                } else {
+                    renderElement.innerText = statData[key].toString();
+                }
+            });
+        } catch (e) {
+            cmts.forEach((key) => {
+                const renderElement: HTMLElement =
+                    document.querySelector(`[data-${this.options.renderCmtName}="${key}" i]`);
                 if (!renderElement) {
                     return;
                 }

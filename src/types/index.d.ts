@@ -3,6 +3,7 @@ interface IOptions {
     url?: string;
     cacheId?: string;
     renderName?: string;
+    renderCmtName?: string;
     timeout?: number;
     loading?: string;
     location?: {
@@ -10,10 +11,16 @@ interface IOptions {
         search: boolean,
         hash: boolean,
     };
+    cmtAPI?: string;
 }
 
 interface IUrlCount {
     url: string;
+    count: number;
+}
+
+interface ICmtCount {
+    id: string;
     count: number;
 }
 
@@ -30,6 +37,8 @@ declare class IUvstatConstructor {
     public setStat(): void;
 
     public renderStat(): void;
+
+    public renderCmtStat(): void;
 
     public clearCache(): void;
 }
