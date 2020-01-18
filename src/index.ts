@@ -37,7 +37,7 @@ class Uvstat {
         }
     }
 
-    public async renderCmtStat() {
+    public async renderCmtStat(after?: (element: HTMLElement, cnt: number) => void) {
         const cmts = getCounts(this.options.renderCmtName, this.options.loading, "id");
         if (cmts.length === 0) {
             return;
@@ -45,9 +45,9 @@ class Uvstat {
 
         try {
             const statData = await this.getCmtStat(cmts, this.options.timeout);
-            renderSucc(statData, this.options.renderCmtName);
+            renderSucc(statData, this.options.renderCmtName, after);
         } catch (e) {
-            renderError(cmts, this.options.renderCmtName, "id");
+            renderError(cmts, this.options.renderCmtName, "id", after);
         }
     }
 

@@ -16,7 +16,8 @@ export const getCounts = (renderCmtName: string, loading: string, key: keyof ICo
     return counts;
 };
 
-export const renderSucc = (statData: { [key: string]: number }, renderName: string) => {
+export const renderSucc = (statData: { [key: string]: number }, renderName: string,
+                           after?: (element: Element, cnt: number) => void) => {
     Object.keys(statData).forEach((key) => {
         const renderElements =
             document.querySelectorAll(`[data-${renderName}="${key}" i]`);
@@ -25,24 +26,37 @@ export const renderSucc = (statData: { [key: string]: number }, renderName: stri
         }
         if (statData[key] === -1) {
             renderElements.forEach((element) => {
-                element.innerHTML = element.getAttribute("data-ocount");
+                const cnt = element.getAttribute("data-ocount");
+                element.innerHTML = cnt;
+                if (after) {
+                    after(element, parseInt(cnt, 10));
+                }
             });
         } else {
             renderElements.forEach((element) => {
-                element.innerHTML = statData[key].toString();
+                const cnt = statData[key];
+                element.innerHTML = cnt.toString();
+                if (after) {
+                    after(element, cnt);
+                }
             });
         }
     });
 };
 
-export const renderError = (counts: ICount[], renderName: string, key: keyof ICount) => {
+export const renderError = (counts: ICount[], renderName: string, key: keyof ICount,
+                            after?: (element: Element, cnt: number) => void) => {
     counts.forEach((count) => {
         const renderElements = document.querySelectorAll(`[data-${renderName}="${count[key]}" i]`);
         if (renderElements.length === 0) {
             return;
         }
         renderElements.forEach((element) => {
-            element.innerHTML = element.getAttribute("data-ocount");
+            const cnt = element.getAttribute("data-ocount");
+            element.innerHTML = cnt;
+            if (after) {
+                after(element, parseInt(cnt, 10));
+            }
         });
     });
 };

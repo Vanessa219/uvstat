@@ -67,7 +67,7 @@ uvstat.addStat()
 |getCmtStat(cmts: ICount[], timeout: number = 0)|获取给定帖子 id 的评论数|
 |addStat()|为当前页面添加计数|
 |renderStat()|浏览计数渲染|
-|renderCmtStat()|评论计数渲染|
+|renderCmtStat(after?: (element: HTMLElement, cnt: number) => void)|评论计数渲染|
 |clearCache()|清除缓存|
 
 ## 欢迎关注 B3log 开源社区微信公众号 `B3log开源`

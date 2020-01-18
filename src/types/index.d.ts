@@ -36,7 +36,7 @@ declare class IUvstatConstructor {
 
     public renderStat(): void;
 
-    public renderCmtStat(): void;
+    public renderCmtStat(after?: (element: HTMLElement, cnt: number) => void): void;
 
     public clearCache(): void;
 }
