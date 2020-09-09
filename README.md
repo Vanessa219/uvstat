@@ -54,9 +54,9 @@ uvstat.addStat()
 |location.search|是否统计 search|false|
 |renderName|浏览计数元素中的 data 属性名称|'uvstaturl'|
 |renderCmtName|评论计数元素中的 data 属性名称|'uvstatcmt'|
-|cmtAPI|评论统计请求地址|'https://hacpai.com/apis/vcomment/count'|
+|cmtAPI|评论统计请求地址|'https://ld246.com/apis/vcomment/count'|
 |timeout|请求超时 ms|2000|
-|url|服务端请求地址|'https://hacpai.com/uvstat'|
+|url|服务端请求地址|'https://ld246.com/uvstat'|
 
 
 #### methods

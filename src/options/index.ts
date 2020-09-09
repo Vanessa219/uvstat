@@ -2,7 +2,7 @@ export const mergeOptions = (options: IOptions) => {
     const defaultOptions: IOptions = {
         cache: true,
         cacheId: "uvstat",
-        cmtAPI: "https://hacpai.com/apis/vcomment/count",
+        cmtAPI: "https://ld246.com/apis/vcomment/count",
         loading: `<svg version="1.1" style="vertical-align: bottom;" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
 <circle fill="#3b3e43" stroke="none" cx="6" cy="50" r="6">
 <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1"></animate>
@@ -22,7 +22,7 @@ export const mergeOptions = (options: IOptions) => {
         renderCmtName: "uvstatcmt",
         renderName: "uvstaturl",
         timeout: 2000,
-        url: "https://hacpai.com/uvstat",
+        url: "https://ld246.com/uvstat",
     };
 
     if (options && options.location) {
